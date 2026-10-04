@@ -1,24 +1,42 @@
-clip_id,frame_index,sample_time_s,source_time_s,visual_score,boxes,target_box,inference_ms,valid,error,baseline_alert,alert_event_baseline,temporal_alert,alert_event_temporal,state,reason,window_samples,positive_samples
-wildfire.mp4,0,0.0,0.0,0.0217742919921875,"[[2475.9, 0.0, 3839.1, 1828.1, 0.0218]]",,342.2,True,,False,False,False,False,Monitoring,No alert under current rule.,1,0
-wildfire.mp4,12,0.5,0.5,0.054229736328125,"[[2442.2, 0.0, 3835.3, 1815.0, 0.0542], [1348.6, 1704.4, 1392.7, 1828.1, 0.0043], [622.3, 675.0, 1145.9, 1200.0, 0.0011]]",,757.7,True,,True,True,False,False,Candidate,1 of 2 samples qualify; waiting for complete window,2,1
-wildfire.mp4,24,1.0,1.001,0.0172576904296875,"[[2421.6, 0.0, 3833.4, 1826.2, 0.0173], [549.4, 26.7, 2006.2, 1829.5, 0.0041]]",,800.7,True,,True,False,False,False,Candidate,1 of 3 samples qualify; waiting for complete window,3,1
-wildfire.mp4,36,1.5,1.501,0.01611328125,"[[558.8, 17.3, 2041.9, 1805.2, 0.0161], [2313.8, 0.0, 3840.0, 1841.3, 0.014]]",,394.4,True,,True,False,False,False,Candidate,1 of 4 samples qualify; waiting for complete window,4,1
-wildfire.mp4,48,2.0,2.002,0.00624847412109375,"[[562.5, 28.1, 2038.1, 1811.3, 0.0062]]",,371.4,True,,True,False,False,False,Candidate,1 of 5 samples qualify; waiting for complete window,5,1
-wildfire.mp4,60,2.5,2.502,0.0027103424072265625,"[[589.7, 661.4, 1119.4, 1217.3, 0.0027]]",,896.4,True,,True,False,False,False,Candidate,1 of 6 samples qualify; waiting for complete window,6,1
-wildfire.mp4,72,3.0,3.003,0.0016326904296875,"[[575.6, 643.6, 1090.3, 1227.7, 0.0016]]",,1228.4,True,,True,False,False,False,Candidate,1 of 7 samples qualify; waiting for complete window,7,1
-wildfire.mp4,84,3.5,3.503,0.00360107421875,"[[569.8, 637.5, 1078.4, 1216.9, 0.0036], [875.4, 1482.2, 937.7, 1592.8, 0.0014]]",,925.8,True,,True,False,False,False,Candidate,1 of 8 samples qualify; waiting for complete window,8,1
-wildfire.mp4,96,4.0,4.004,0.0034637451171875,"[[565.3, 635.6, 1094.1, 1215.0, 0.0035], [865.3, 1470.9, 929.1, 1581.6, 0.0023]]",,811.9,True,,True,False,False,False,Candidate,1 of 9 samples qualify; waiting for complete window,9,1
-wildfire.mp4,108,4.5,4.504,0.004425048828125,"[[564.6, 628.1, 1113.5, 1207.5, 0.0044], [0.1, 485.6, 29.9, 525.0, 0.0042], [858.8, 1464.4, 914.1, 1576.9, 0.0011]]",,1103.1,True,,True,False,False,False,Candidate,1 of 10 samples qualify; waiting for complete window,10,1
-wildfire.mp4,120,5.0,5.005,0.0027408599853515625,"[[853.6, 1454.1, 914.5, 1568.4, 0.0027], [565.3, 628.1, 1121.2, 1198.1, 0.002]]",,886.4,True,,True,False,False,False,Candidate,1 of 10 samples qualify; waiting for 8 qualifying samples,10,1
-wildfire.mp4,132,5.5,5.505,0.0024013519287109375,"[[568.1, 661.4, 1166.2, 1228.6, 0.0024]]",,822.9,True,,True,False,False,False,Monitoring,No alert under current rule.,10,0
-wildfire.mp4,144,6.0,6.006,0.002239227294921875,"[[569.3, 660.0, 1129.5, 1209.4, 0.0022]]",,519.0,True,,True,False,False,False,Monitoring,No alert under current rule.,10,0
-wildfire.mp4,156,6.5,6.506,0.0020236968994140625,"[[835.1, 1433.4, 880.5, 1544.1, 0.002]]",,1362.2,True,,True,False,False,False,Monitoring,No alert under current rule.,10,0
-wildfire.mp4,168,7.0,7.007,0.004390716552734375,"[[570.9, 631.9, 1100.6, 1170.0, 0.0044]]",,756.1,True,,True,False,False,False,Monitoring,No alert under current rule.,10,0
-wildfire.mp4,180,7.5,7.507,0.0021610260009765625,"[[570.9, 631.4, 1068.8, 1179.8, 0.0022]]",,735.4,True,,True,False,False,False,Monitoring,No alert under current rule.,10,0
-wildfire.mp4,192,8.0,8.008,0.003215789794921875,"[[813.5, 1413.8, 855.2, 1503.8, 0.0032]]",,609.1,True,,True,False,False,False,Monitoring,No alert under current rule.,10,0
-wildfire.mp4,204,8.5,8.508,0.0012674331665039062,"[[809.5, 1410.0, 849.8, 1492.5, 0.0013], [330.9, 698.0, 861.6, 1255.8, 0.0011]]",,1144.4,True,,True,False,False,False,Monitoring,No alert under current rule.,10,0
-wildfire.mp4,216,9.0,9.009,0.00384521484375,"[[807.4, 1394.1, 880.1, 1530.9, 0.0038], [337.5, 698.9, 896.2, 1258.6, 0.001]]",,1182.2,True,,True,False,False,False,Monitoring,No alert under current rule.,10,0
-wildfire.mp4,228,9.5,9.509,0.0010547637939453125,"[[805.3, 1385.6, 847.5, 1475.6, 0.0011]]",,1459.8,True,,True,False,False,False,Monitoring,No alert under current rule.,10,0
-wildfire.mp4,240,10.0,10.01,0.0,[],,1025.2,True,,True,False,False,False,Monitoring,No alert under current rule.,10,0
-wildfire.mp4,252,10.5,10.51,0.0012769699096679688,"[[803.9, 1367.8, 844.2, 1459.7, 0.0013]]",,946.4,True,,True,False,False,False,Monitoring,No alert under current rule.,10,0
-wildfire.mp4,264,11.0,11.011,0.0028705596923828125,"[[1108.1, 1602.2, 1138.1, 1667.8, 0.0029]]",,894.4,True,,True,False,False,False,Monitoring,No alert under current rule.,10,0
+clip_id,frame_index,sample_time_s,source_time_s,visual_score,boxes,target_box,target_iou,inference_ms,valid,error,baseline_alert,alert_event_baseline,temporal_alert,alert_event_temporal,state,reason,window_samples,positive_samples
+smoke.mp4,0,0.0,0.0,0.0,[],"[1844, 1164, 2176, 1532]",0.0,233.7,True,,False,False,False,False,Monitoring,No alert under current rule.,1,0
+smoke.mp4,12,0.5,0.5,0.0,[],"[1846, 1162, 2176, 1532]",0.0,168.3,True,,False,False,False,False,Monitoring,No alert under current rule.,2,0
+smoke.mp4,24,1.0,1.001,0.0,[],"[1846, 1159, 2178, 1534]",0.0,157.7,True,,False,False,False,False,Monitoring,No alert under current rule.,3,0
+smoke.mp4,36,1.5,1.501,0.0,[],"[1847, 1153, 2179, 1533]",0.0,143.9,True,,False,False,False,False,Monitoring,No alert under current rule.,4,0
+smoke.mp4,48,2.0,2.002,0.0,[],"[1845, 1146, 2181, 1532]",0.0,145.3,True,,False,False,False,False,Monitoring,No alert under current rule.,5,0
+smoke.mp4,60,2.5,2.502,0.02239990234375,"[[944.5, 65.6, 2475.5, 1666.9, 0.0224]]","[1844, 1141, 2182, 1532]",0.054,143.9,True,,False,False,False,False,Monitoring,No alert under current rule.,6,0
+smoke.mp4,72,3.0,3.003,0.0418701171875,"[[958.1, 60.0, 2385.0, 1668.7, 0.0419]]","[1844, 1138, 2185, 1532]",0.059,144.2,True,,True,True,False,False,Candidate,1 of 7 samples qualify; waiting for complete window,7,1
+smoke.mp4,84,3.5,3.503,0.045135498046875,"[[952.0, 61.9, 2389.2, 1665.0, 0.0451]]","[1842, 1133, 2186, 1530]",0.059,203.9,True,,True,False,False,False,Candidate,2 of 8 samples qualify; waiting for complete window,8,2
+smoke.mp4,96,4.0,4.004,0.040191650390625,"[[937.5, 59.5, 2467.5, 1665.5, 0.0402]]","[1841, 1132, 2197, 1529]",0.058,146.3,True,,True,False,False,False,Candidate,3 of 9 samples qualify; waiting for complete window,9,3
+smoke.mp4,108,4.5,4.504,0.0236358642578125,"[[929.5, 61.9, 2426.7, 1665.0, 0.0236]]","[1838, 1134, 2202, 1528]",0.06,144.3,True,,True,False,False,False,Candidate,3 of 10 samples qualify; waiting for complete window,10,3
+smoke.mp4,120,5.0,5.005,0.05609130859375,"[[885.0, 67.5, 2366.2, 1672.5, 0.0561]]","[1837, 1135, 2207, 1528]",0.061,150.8,True,,True,False,False,False,Candidate,4 of 10 samples qualify; waiting for 5 qualifying samples,10,4
+smoke.mp4,132,5.5,5.505,0.060028076171875,"[[894.4, 63.7, 2377.5, 1672.5, 0.06]]","[1836, 1133, 2211, 1526]",0.062,180.1,True,,True,False,True,True,Review alert,"Possible smoke requires review: 5 of 10 samples >= 0.03 in (0.5s, 5.5s]",10,5
+smoke.mp4,144,6.0,6.006,0.0,[],"[1834, 1130, 2215, 1523]",0.0,148.8,True,,True,False,True,False,Review alert,"Possible smoke requires review: 5 of 10 samples >= 0.03 in (0.5s, 5.5s]",10,5
+smoke.mp4,156,6.5,6.506,0.0,[],"[1831, 1129, 2215, 1521]",0.0,141.6,True,,True,False,True,False,Review alert,"Possible smoke requires review: 5 of 10 samples >= 0.03 in (0.5s, 5.5s]",10,5
+smoke.mp4,168,7.0,7.007,0.0,[],"[1829, 1134, 2217, 1520]",0.0,148.1,True,,True,False,True,False,Review alert,"Possible smoke requires review: 5 of 10 samples >= 0.03 in (0.5s, 5.5s]",10,5
+smoke.mp4,180,7.5,7.507,0.039093017578125,"[[1398.8, 1039.2, 2341.9, 1634.5, 0.0391]]","[1828, 1135, 2218, 1520]",0.267,144.7,True,,True,False,True,False,Review alert,"Possible smoke requires review: 5 of 10 samples >= 0.03 in (0.5s, 5.5s]",10,6
+smoke.mp4,192,8.0,8.008,0.0418701171875,"[[1006.9, 936.6, 2358.8, 1650.9, 0.0419]]","[1828, 1135, 2219, 1520]",0.156,148.9,True,,True,False,True,False,Review alert,"Possible smoke requires review: 5 of 10 samples >= 0.03 in (0.5s, 5.5s]",10,6
+smoke.mp4,204,8.5,8.508,0.039886474609375,"[[971.2, 976.9, 2377.5, 1655.6, 0.0399]]","[1828, 1133, 2223, 1520]",0.16,147.3,True,,True,False,True,False,Review alert,"Possible smoke requires review: 5 of 10 samples >= 0.03 in (0.5s, 5.5s]",10,6
+smoke.mp4,216,9.0,9.009,0.0435791015625,"[[967.0, 963.3, 2408.0, 1658.0, 0.0436]]","[1828, 1128, 2225, 1522]",0.156,145.4,True,,True,False,True,False,Review alert,"Possible smoke requires review: 5 of 10 samples >= 0.03 in (0.5s, 5.5s]",10,6
+smoke.mp4,228,9.5,9.509,0.02813720703125,"[[948.8, 931.9, 2424.4, 1659.4, 0.0281]]","[1828, 1124, 2224, 1521]",0.146,141.9,True,,True,False,True,False,Review alert,"Possible smoke requires review: 5 of 10 samples >= 0.03 in (0.5s, 5.5s]",10,6
+smoke.mp4,240,10.0,10.01,0.0,[],"[1828, 1118, 2226, 1522]",0.0,143.8,True,,True,False,True,False,Review alert,"Possible smoke requires review: 5 of 10 samples >= 0.03 in (0.5s, 5.5s]",10,5
+smoke.mp4,252,10.5,10.51,0.004619598388671875,"[[930.0, 771.6, 2463.8, 1658.4, 0.0046]]","[1830, 1111, 2225, 1521]",0.119,140.2,True,,True,False,True,False,Review alert,"Possible smoke requires review: 5 of 10 samples >= 0.03 in (0.5s, 5.5s]",10,4
+smoke.mp4,264,11.0,11.011,0.00624847412109375,"[[1211.2, 309.4, 2595.0, 1665.0, 0.0062]]","[1833, 1105, 2226, 1520]",0.087,151.8,True,,True,False,True,False,Review alert,"Possible smoke requires review: 5 of 10 samples >= 0.03 in (0.5s, 5.5s]",10,4
+smoke.mp4,276,11.5,11.511,0.0,[],"[1830, 1100, 2229, 1520]",0.0,140.0,True,,True,False,True,False,Review alert,"Possible smoke requires review: 5 of 10 samples >= 0.03 in (0.5s, 5.5s]",10,4
+smoke.mp4,288,12.0,12.012,0.0102996826171875,"[[1036.9, 693.3, 2418.8, 1646.7, 0.0103]]","[1837, 1096, 2232, 1522]",0.128,227.2,True,,True,False,True,False,Review alert,"Possible smoke requires review: 5 of 10 samples >= 0.03 in (0.5s, 5.5s]",10,4
+smoke.mp4,300,12.5,12.512,0.0,[],"[1838, 1088, 2234, 1523]",0.0,141.7,True,,True,False,True,False,Review alert,"Possible smoke requires review: 5 of 10 samples >= 0.03 in (0.5s, 5.5s]",10,3
+smoke.mp4,312,13.0,13.013,0.0,[],"[1841, 1082, 2237, 1523]",0.0,137.1,True,,True,False,True,False,Review alert,"Possible smoke requires review: 5 of 10 samples >= 0.03 in (0.5s, 5.5s]",10,2
+smoke.mp4,324,13.5,13.513,0.0,[],"[1846, 1075, 2240, 1523]",0.0,153.9,True,,True,False,True,False,Review alert,"Possible smoke requires review: 5 of 10 samples >= 0.03 in (0.5s, 5.5s]",10,1
+smoke.mp4,336,14.0,14.014,0.0,[],"[1851, 1069, 2246, 1525]",0.0,161.1,True,,True,False,True,False,Review alert,"Possible smoke requires review: 5 of 10 samples >= 0.03 in (0.5s, 5.5s]",10,0
+smoke.mp4,348,14.5,14.514,0.0,[],"[1849, 1062, 2251, 1524]",0.0,187.1,True,,True,False,True,False,Review alert,"Possible smoke requires review: 5 of 10 samples >= 0.03 in (0.5s, 5.5s]",10,0
+smoke.mp4,360,15.0,15.015,0.0,[],"[1850, 1057, 2253, 1524]",0.0,145.4,True,,True,False,True,False,Review alert,"Possible smoke requires review: 5 of 10 samples >= 0.03 in (0.5s, 5.5s]",10,0
+smoke.mp4,372,15.5,15.515,0.0,[],"[1851, 1050, 2258, 1524]",0.0,144.3,True,,True,False,True,False,Review alert,"Possible smoke requires review: 5 of 10 samples >= 0.03 in (0.5s, 5.5s]",10,0
+smoke.mp4,384,16.0,16.016,0.0,[],"[1849, 1045, 2263, 1524]",0.0,144.8,True,,True,False,True,False,Review alert,"Possible smoke requires review: 5 of 10 samples >= 0.03 in (0.5s, 5.5s]",10,0
+smoke.mp4,396,16.5,16.516,0.0,[],"[1848, 1038, 2267, 1524]",0.0,142.0,True,,True,False,True,False,Review alert,"Possible smoke requires review: 5 of 10 samples >= 0.03 in (0.5s, 5.5s]",10,0
+smoke.mp4,408,17.0,17.017,0.0,[],"[1850, 1029, 2269, 1524]",0.0,139.8,True,,True,False,True,False,Review alert,"Possible smoke requires review: 5 of 10 samples >= 0.03 in (0.5s, 5.5s]",10,0
+smoke.mp4,420,17.5,17.517,0.0019989013671875,"[[985.8, 593.0, 2404.2, 1657.0, 0.002]]","[1851, 1020, 2272, 1522]",0.14,140.1,True,,True,False,True,False,Review alert,"Possible smoke requires review: 5 of 10 samples >= 0.03 in (0.5s, 5.5s]",10,0
+smoke.mp4,432,18.0,18.018,0.0025959014892578125,"[[991.9, 591.6, 2388.8, 1658.4, 0.0026]]","[1851, 1014, 2274, 1523]",0.144,147.2,True,,True,False,True,False,Review alert,"Possible smoke requires review: 5 of 10 samples >= 0.03 in (0.5s, 5.5s]",10,0
+smoke.mp4,444,18.5,18.518,0.0013179779052734375,"[[2889.4, 1492.5, 2956.9, 1552.5, 0.0013]]","[1849, 1007, 2273, 1523]",0.0,141.3,True,,True,False,True,False,Review alert,"Possible smoke requires review: 5 of 10 samples >= 0.03 in (0.5s, 5.5s]",10,0
+smoke.mp4,456,19.0,19.019,0.0,[],"[1848, 1003, 2272, 1523]",0.0,138.0,True,,True,False,True,False,Review alert,"Possible smoke requires review: 5 of 10 samples >= 0.03 in (0.5s, 5.5s]",10,0
+smoke.mp4,468,19.5,19.519,0.0,[],"[1846, 999, 2274, 1523]",0.0,139.6,True,,True,False,True,False,Review alert,"Possible smoke requires review: 5 of 10 samples >= 0.03 in (0.5s, 5.5s]",10,0
+smoke.mp4,480,20.0,20.02,0.0,[],"[1847, 991, 2277, 1523]",0.0,134.6,True,,True,False,True,False,Review alert,"Possible smoke requires review: 5 of 10 samples >= 0.03 in (0.5s, 5.5s]",10,0

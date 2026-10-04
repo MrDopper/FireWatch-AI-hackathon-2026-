@@ -20,13 +20,15 @@ CLIPS = {
     "Wildfire Video 4k.mp4": "smoke",
     "Fog Over Forest 4k Video.mp4": "fog",
     "smoke.mp4": "smoke",
+    "wildfire.mp4": "smoke",
+    "fog.mp4": "fog",
 }
 
 SAMPLE_RATE = 2  # frames per source second
 
 # --- detection parameters (tune for your footage) ---
-MAX_SATURATION = 60       # smoke is almost colourless
-MIN_VALUE = 110           # and fairly bright
+MAX_SATURATION = 110       # smoke is almost colourless
+MIN_VALUE = 90          # and fairly bright
 MAX_BLUE_EXCESS = 15      # (B - R) above this -> sky, not smoke
 MOTION_DIFF = 6           # difference vs background (0..255)
 BG_ALPHA = 0.1            # background update speed
