@@ -20,5 +20,5 @@ Then to test the model use
 
 To test the camera use:
 ```
-./.venv/bin/python -m Code.pipeline "data/wildfire.mp4" --threshold 0.03
+./.venv/bin/python -m src.pipeline "data/wildfire.mp4" --threshold 0.03
 ```
