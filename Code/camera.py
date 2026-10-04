@@ -1,3 +1,5 @@
+# camera.py
+
 import cv2
 import os
 
@@ -12,10 +14,11 @@ def read_samples(
     output_folder="captured_frames"
 ):
     """
-    Reads a video and yields sampled frames.
+    Read a video, display it, save sampled frames,
+    and yield frame information.
 
-    sample_rate=2
-    means 2 frames per second.
+    sample_rate=2 means:
+    keep 2 frames per second.
     """
 
     os.makedirs(output_folder, exist_ok=True)
@@ -38,6 +41,7 @@ def read_samples(
     saved_count = 0
 
     try:
+
         while True:
 
             success, frame = cap.read()
@@ -47,6 +51,17 @@ def read_samples(
 
             source_time_s = frame_index / fps
 
+            # Display video window
+            cv2.imshow(
+                "FireWatch Camera Feed",
+                frame
+            )
+
+            # Quit if q is pressed
+            if cv2.waitKey(1) & 0xFF == ord("q"):
+                break
+
+            # Save sampled frame
             if frame_index % step == 0:
 
                 filename = (
@@ -59,7 +74,10 @@ def read_samples(
                     filename
                 )
 
-                cv2.imwrite(save_path, frame)
+                cv2.imwrite(
+                    save_path,
+                    frame
+                )
 
                 print(
                     f"Saved {filename} "
@@ -77,13 +95,33 @@ def read_samples(
             frame_index += 1
 
     finally:
+
         cap.release()
+        cv2.destroyAllWindows()
+
+        print("\nFinished.")
+        print(
+            f"Frames saved: {saved_count}"
+        )
+        print(
+            f"Folder: {output_folder}"
+        )
 
 
 if __name__ == "__main__":
 
-    for sample in read_samples("Photos/Dog.mp4"):
-        print(
-            sample["frame_index"],
-            sample["source_time_s"]
-        )
+    VIDEO_PATH = "Photos/flame.mp4"
+
+    try:
+
+        for sample in read_samples(
+            VIDEO_PATH,
+            sample_rate=2
+        ):
+            print(
+                f"Frame {sample['frame_index']} | "
+                f"Time {sample['source_time_s']:.2f}s"
+            )
+
+    except CameraError as e:
+        print(f"Error: {e}")
