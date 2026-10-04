@@ -1,11 +1,15 @@
 # camera.py
 
-import cv2
 import os
+
+import cv2
 
 
 class CameraError(Exception):
     pass
+
+
+WINDOW_NAME = "FireWatch Camera Feed"
 
 
 def read_samples(
@@ -14,14 +18,15 @@ def read_samples(
     output_folder="captured_frames"
 ):
     """
-    Read a video, display it, save sampled frames,
-    and yield frame information.
+    Read a video, save sampled frames, and yield frame information.
 
-    sample_rate=2 means:
-    keep 2 frames per second.
+    sample_rate=2 means one sample per scheduled half-second slot of source
+    time (0.0s, 0.5s, 1.0s, ...). Each slot takes the decoded frame closest to
+    it, so the schedule does not drift on fractional FPS such as 23.976.
     """
 
-    os.makedirs(output_folder, exist_ok=True)
+    if output_folder:
+        os.makedirs(output_folder, exist_ok=True)
 
     cap = cv2.VideoCapture(video_path)
 
@@ -35,9 +40,11 @@ def read_samples(
     if fps <= 0:
         raise CameraError("Invalid FPS")
 
-    step = max(1, round(fps / sample_rate))
+    period = 1 / sample_rate
+    half_frame = 0.5 / fps
 
     frame_index = 0
+    slot_index = 0
     saved_count = 0
 
     try:
@@ -50,78 +57,78 @@ def read_samples(
                 break
 
             source_time_s = frame_index / fps
+            sample_time_s = slot_index * period
 
-            # Display video window
-            cv2.imshow(
-                "FireWatch Camera Feed",
-                frame
-            )
+            if source_time_s + half_frame >= sample_time_s:
 
-            # Quit if q is pressed
-            if cv2.waitKey(1) & 0xFF == ord("q"):
-                break
-
-            # Save sampled frame
-            if frame_index % step == 0:
-
-                filename = (
-                    f"frame_{saved_count:04d}_"
-                    f"{source_time_s:.1f}s.jpg"
-                )
-
-                save_path = os.path.join(
-                    output_folder,
-                    filename
-                )
-
-                cv2.imwrite(
-                    save_path,
-                    frame
-                )
-
-                print(
-                    f"Saved {filename} "
-                    f"(time={source_time_s:.2f}s)"
-                )
+                if output_folder:
+                    filename = (
+                        f"frame_{saved_count:04d}_"
+                        f"{sample_time_s:.1f}s.jpg"
+                    )
+                    cv2.imwrite(
+                        os.path.join(output_folder, filename),
+                        frame
+                    )
 
                 yield {
                     "frame": frame,
                     "frame_index": frame_index,
+                    "sample_time_s": sample_time_s,
                     "source_time_s": source_time_s,
                 }
 
                 saved_count += 1
+                slot_index += 1
 
             frame_index += 1
 
     finally:
 
         cap.release()
-        cv2.destroyAllWindows()
 
         print("\nFinished.")
-        print(
-            f"Frames saved: {saved_count}"
+        print(f"Frames saved: {saved_count}")
+        if output_folder:
+            print(f"Folder: {output_folder}")
+
+
+def show_frame(frame, max_width=1280, delay_ms=1):
+    """Display a frame scaled to max_width. Returns False if q was pressed."""
+
+    height, width = frame.shape[:2]
+    if width > max_width:
+        frame = cv2.resize(
+            frame,
+            (max_width, int(height * max_width / width))
         )
-        print(
-            f"Folder: {output_folder}"
-        )
+
+    cv2.imshow(WINDOW_NAME, frame)
+
+    return (cv2.waitKey(delay_ms) & 0xFF) != ord("q")
+
+
+def close_display():
+    cv2.destroyAllWindows()
 
 
 if __name__ == "__main__":
 
-    VIDEO_PATH = "Photos/flame.mp4"
+    VIDEO_PATH = "data/Smoke Plume 4K Video.mp4"
 
     try:
 
-        for sample in read_samples(
-            VIDEO_PATH,
-            sample_rate=2
-        ):
+        for sample in read_samples(VIDEO_PATH, sample_rate=2):
             print(
                 f"Frame {sample['frame_index']} | "
+                f"Slot {sample['sample_time_s']:.1f}s | "
                 f"Time {sample['source_time_s']:.2f}s"
             )
+            if not show_frame(sample["frame"], delay_ms=500):
+                break
 
     except CameraError as e:
         print(f"Error: {e}")
+
+    finally:
+        close_display()
