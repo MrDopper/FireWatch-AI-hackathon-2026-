@@ -15,7 +15,7 @@ WINDOW_NAME = "FireWatch Camera Feed"
 def read_samples(
     video_path,
     sample_rate=2,
-    output_folder="captured_frames"
+    output_folder=None 
 ):
     """
     Read a video, save sampled frames, and yield frame information.
@@ -88,9 +88,9 @@ def read_samples(
         cap.release()
 
         print("\nFinished.")
-        print(f"Frames saved: {saved_count}")
+        print(f"Samples read: {saved_count}")
         if output_folder:
-            print(f"Folder: {output_folder}")
+            print(f"Frames saved to: {output_folder}")
 
 
 def show_frame(frame, max_width=1280, delay_ms=1):

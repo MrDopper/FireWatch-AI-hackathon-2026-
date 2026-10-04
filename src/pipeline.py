@@ -47,7 +47,24 @@ def detect(engine, frame_bgr):
         "valid": valid,
         "error": error,
     }
+def box_iou(a, b):
+    """IoU of two [x1, y1, x2, y2] boxes in the same pixel coordinates."""
+    ix1, iy1 = max(a[0], b[0]), max(a[1], b[1])
+    ix2, iy2 = min(a[2], b[2]), min(a[3], b[3])
+    inter = max(0.0, ix2 - ix1) * max(0.0, iy2 - iy1)
+    union = ((a[2] - a[0]) * (a[3] - a[1]) + (b[2] - b[0]) * (b[3] - b[1]) - inter)
+    return inter / union if union > 0 else 0.0
 
+
+def target_iou(target_box, model_boxes):
+    """Best IoU between the reference target box and any model box.
+
+    None when there is no target box (nothing to compare against); 0.0 when
+    there is a target but the model drew no boxes.
+    """
+    if not target_box:
+        return None
+    return max((box_iou(target_box, b[:4]) for b in model_boxes), default=0.0)  
 
 def draw_overlay(frame, target_box, result, decision, record):
     """Draw the target box (red), model boxes (green) and the evidence panel."""
@@ -92,7 +109,7 @@ def draw_overlay(frame, target_box, result, decision, record):
     return out
 
 
-def process_clip(video_path, engine, config=DEFAULT_CONFIG, show=True, annotated_dir=None):
+def process_clip(video_path, engine, config=DEFAULT_CONFIG, show=True, annotated_dir=None, frames_dir=None):
 
     clip_id = os.path.basename(video_path)
     # The footage label only decides whether a reference target box is drawn;
@@ -106,7 +123,7 @@ def process_clip(video_path, engine, config=DEFAULT_CONFIG, show=True, annotated
     if annotated_dir:
         os.makedirs(annotated_dir, exist_ok=True)
 
-    for sample in read_samples(video_path, sample_rate=config["sample_hz"]):
+    for sample in read_samples(video_path, sample_rate=config["sample_hz"], output_folder=frames_dir):
 
         frame = sample["frame"]
         result = detect(engine, frame)
@@ -137,6 +154,8 @@ def process_clip(video_path, engine, config=DEFAULT_CONFIG, show=True, annotated
             "boxes": json.dumps([[round(v, 1) for v in b[:4]] + [round(b[4], 4)]
                                  for b in result["boxes"]]),
             "target_box": json.dumps(target_box) if target_box else "",
+            "target_iou": (None if not target_box
+                           else round(target_iou(target_box, result["boxes"]), 3)),
             "inference_ms": round(result["inference_ms"], 1),
             "valid": result["valid"],
             "error": result["error"],
@@ -197,6 +216,23 @@ def save_csv(
 
     print(f"Saved CSV: {output_file}")
 
+def print_summary(records, config):
+    """Short end-of-run summary: alerts and how well model boxes match the target."""
+    if not records:
+        return
+    first_base = next((r["source_time_s"] for r in records if r["alert_event_baseline"]), None)
+    first_temp = next((r["source_time_s"] for r in records if r["alert_event_temporal"]), None)
+    ious = [r["target_iou"] for r in records if r["target_iou"] is not None]
+    print(f"\nthreshold={config['threshold']}  window={config['window_s']}s  "
+          f"min_positive={config['min_positive']}")
+    print(f"First immediate alert: {'none' if first_base is None else f'{first_base:.2f}s'}")
+    print(f"First temporal alert:  {'none' if first_temp is None else f'{first_temp:.2f}s'}")
+    if ious:
+        hit = [r["target_iou"] for r in records
+               if r["target_iou"] is not None and r["boxes"] != "[]"]
+        print(f"Model vs target IoU: mean {sum(ious) / len(ious):.2f} over {len(ious)} samples"
+              + (f" (mean {sum(hit) / len(hit):.2f} on the {len(hit)} samples with a model box)"
+                 if hit else ""))
 
 if __name__ == "__main__":
 
@@ -204,9 +240,20 @@ if __name__ == "__main__":
     parser.add_argument("video", nargs="?", default="data/Smoke Plume 4K Video.mp4")
     parser.add_argument("--threshold", type=float, default=DEFAULT_CONFIG["threshold"])
     parser.add_argument("--no-display", action="store_true")
+    parser.add_argument("--min-positive", type=int, default=DEFAULT_CONFIG["min_positive"],
+                        help="qualifying samples needed in the window for the temporal alert")
+    parser.add_argument("--window", type=float, default=DEFAULT_CONFIG["window_s"],
+                        help="temporal window length in seconds")
+    parser.add_argument("--save-frames", action="store_true",
+                        help="also save every sampled raw frame to captured_frames/")
     args = parser.parse_args()
 
-    config = {**DEFAULT_CONFIG, "threshold": args.threshold}
+    config = {
+        **DEFAULT_CONFIG,
+        "threshold": args.threshold,
+        "min_positive": args.min_positive,
+        "window_s": args.window,
+    }
     clip_stem = Path(args.video).stem.replace(" ", "_")
 
     try:
@@ -216,6 +263,7 @@ if __name__ == "__main__":
             config,
             show=not args.no_display,
             annotated_dir=f"results/annotated/{clip_stem}",
+            frames_dir="captured_frames" if args.save_frames else None,
         )
     except CameraError as e:
         print(f"Error: {e}")
@@ -224,7 +272,7 @@ if __name__ == "__main__":
         close_display()
 
     save_csv(records)
-
+    print_summary(records, config)
     print(
         f"Processed {len(records)} samples."
     )

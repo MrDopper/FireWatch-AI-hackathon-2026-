@@ -8,7 +8,7 @@ DEFAULT_CONFIG = {
     "sample_hz": 2.0,
     "window_s": 5.0,
     "threshold": 0.70,
-    "min_positive": 8,
+    "min_positive": 5,
     "model_version": "yolo11s_rapid-raccoon_v8.1.0",
 }
 
