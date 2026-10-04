@@ -114,7 +114,7 @@ def close_display():
 
 if __name__ == "__main__":
 
-    VIDEO_PATH = "data/Smoke Plume 4K Video.mp4"
+    VIDEO_PATH = "data/*.mp4"
 
     try:
 
