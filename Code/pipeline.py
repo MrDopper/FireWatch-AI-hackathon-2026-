@@ -79,7 +79,7 @@ def save_csv(
 
 if __name__ == "__main__":
 
-    video_path = "Photos/Dog.mp4"
+    video_path = "Photos/flame.mp4"
 
     records = process_clip(video_path)
 
