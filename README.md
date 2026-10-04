@@ -7,8 +7,13 @@ git clone --recurse-submodules https://github.com/MrDopper/FireWatch-AI-hackatho
 
 This code will allow you to interact with our subrepository that we are currently working: 
 ```
-python -m pip install \
-  -e ./external/pyro-engine/pyro-predictor \
-  -e ./external/pyro-engine/pyro_camera_api/client \
-  -e ./external/pyro-engine
+./.venv/bin/python -m pip install \
+  ./external/pyro-engine/pyro-predictor \
+  ./external/pyro-engine/pyro_camera_api/client \
+  ./external/pyro-engine
+```
+
+Then to test the model use
+```
+./.venv/bin/python -m src.detector
 ```
