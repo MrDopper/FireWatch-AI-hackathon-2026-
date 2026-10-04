@@ -13,7 +13,7 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT))
 
 from .camera import CameraError, close_display, read_samples, show_frame  # noqa: E402
-from .target_box import CLIPS, smoke_target_box  # noqa: E402
+from .target_box import CLIPS, SmokeTargetTracker
 from .detector import detect as model_detect  # noqa: E402
 from .detector import loadDetector  # noqa: E402
 from .temporal import DEFAULT_CONFIG, new_temporal_state, update_temporal  # noqa: E402
@@ -98,6 +98,7 @@ def process_clip(video_path, engine, config=DEFAULT_CONFIG, show=True, annotated
     # The footage label only decides whether a reference target box is drawn;
     # it never reaches the detector or the alert rules.
     draw_target = CLIPS.get(clip_id) == "smoke"
+    tracker = SmokeTargetTracker() if draw_target else None
     state = new_temporal_state(clip_id)
     baseline_alert = False
     records = []
@@ -109,7 +110,7 @@ def process_clip(video_path, engine, config=DEFAULT_CONFIG, show=True, annotated
 
         frame = sample["frame"]
         result = detect(engine, frame)
-        target_box = smoke_target_box(frame) if draw_target else None
+        target_box = tracker(frame) if tracker else None
 
         decision = update_temporal(state, {
             "clip_id": clip_id,
