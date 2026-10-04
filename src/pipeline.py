@@ -14,9 +14,9 @@ sys.path.insert(0, str(ROOT))
 
 from .camera import CameraError, close_display, read_samples, show_frame  # noqa: E402
 from .target_box import CLIPS, smoke_target_box  # noqa: E402
-from src.detector import detect as model_detect  # noqa: E402
-from src.detector import loadDetector  # noqa: E402
-from src.temporal import DEFAULT_CONFIG, new_temporal_state, update_temporal  # noqa: E402
+from .detector import detect as model_detect  # noqa: E402
+from .detector import loadDetector  # noqa: E402
+from .temporal import DEFAULT_CONFIG, new_temporal_state, update_temporal  # noqa: E402
 
 RED = (0, 0, 255)
 GREEN = (0, 255, 0)
