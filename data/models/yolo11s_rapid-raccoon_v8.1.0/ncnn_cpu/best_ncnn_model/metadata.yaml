@@ -1,0 +1,19 @@
+description: Ultralytics YOLO11s model trained on /actions-runner/_work/pyro-train/pyro-train/data/01_model_input/yolo_train_val_small/datasets/data.yaml
+author: Ultralytics
+date: '2026-05-20T14:59:56.516361'
+version: 8.4.21
+license: AGPL-3.0 License (https://ultralytics.com/license)
+docs: https://docs.ultralytics.com
+stride: 32
+task: detect
+batch: 1
+imgsz:
+- 1024
+- 1024
+names:
+  0: item
+args:
+  batch: 1
+  half: false
+channels: 3
+end2end: false
