@@ -1,17 +1,21 @@
-# camera.py
-
 import cv2
 import os
 
 
-def read_samples(video_path, sample_rate=2, output_folder="captured_frames"):
-    """
-    Read video, display it, and save sampled frames.
+class CameraError(Exception):
+    pass
 
-    Args:
-        video_path: path to video
-        sample_rate: frames per second to save
-        output_folder: folder for saved images
+
+def read_samples(
+    video_path,
+    sample_rate=2,
+    output_folder="captured_frames"
+):
+    """
+    Reads a video and yields sampled frames.
+
+    sample_rate=2
+    means 2 frames per second.
     """
 
     os.makedirs(output_folder, exist_ok=True)
@@ -19,65 +23,67 @@ def read_samples(video_path, sample_rate=2, output_folder="captured_frames"):
     cap = cv2.VideoCapture(video_path)
 
     if not cap.isOpened():
-        raise Exception(f"Cannot open video: {video_path}")
+        raise CameraError(
+            f"Cannot open video: {video_path}"
+        )
 
     fps = cap.get(cv2.CAP_PROP_FPS)
 
     if fps <= 0:
-        raise Exception("Invalid FPS")
+        raise CameraError("Invalid FPS")
 
     step = max(1, round(fps / sample_rate))
 
     frame_index = 0
     saved_count = 0
 
-    while True:
-        success, frame = cap.read()
+    try:
+        while True:
 
-        if not success:
-            break
+            success, frame = cap.read()
 
-        # Show video
-        cv2.imshow("FireWatch Camera Feed", frame)
+            if not success:
+                break
 
-        source_time_s = frame_index / fps
+            source_time_s = frame_index / fps
 
-        # Save sampled frames
-        if frame_index % step == 0:
+            if frame_index % step == 0:
 
-            filename = (
-                f"frame_{saved_count:04d}_"
-                f"{source_time_s:.1f}s.jpg"
-            )
+                filename = (
+                    f"frame_{saved_count:04d}_"
+                    f"{source_time_s:.1f}s.jpg"
+                )
 
-            save_path = os.path.join(output_folder, filename)
+                save_path = os.path.join(
+                    output_folder,
+                    filename
+                )
 
-            cv2.imwrite(save_path, frame)
+                cv2.imwrite(save_path, frame)
 
-            print(
-                f"Saved {filename} "
-                f"(time={source_time_s:.2f}s)"
-            )
+                print(
+                    f"Saved {filename} "
+                    f"(time={source_time_s:.2f}s)"
+                )
 
-            saved_count += 1
+                yield {
+                    "frame": frame,
+                    "frame_index": frame_index,
+                    "source_time_s": source_time_s,
+                }
 
-        frame_index += 1
+                saved_count += 1
 
-        # Press q to quit
-        if cv2.waitKey(1) & 0xFF == ord("q"):
-            break
+            frame_index += 1
 
-    cap.release()
-    cv2.destroyAllWindows()
-
-    print(f"\nFinished.")
-    print(f"Frames saved: {saved_count}")
-    print(f"Folder: {output_folder}")
+    finally:
+        cap.release()
 
 
 if __name__ == "__main__":
-    read_samples(
-        "Photos/Dog.mp4",
-        sample_rate=2,
-        output_folder="captured_frames"
-    )
+
+    for sample in read_samples("Photos/Dog.mp4"):
+        print(
+            sample["frame_index"],
+            sample["source_time_s"]
+        )
