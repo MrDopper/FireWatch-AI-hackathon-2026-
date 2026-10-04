@@ -15,9 +15,9 @@ DATA = ROOT / "data"
 OUT = ROOT / "results" / "targets"
 
 CLIPS = {
-    "Smoke Plume 4K Video.mp4": "smoke",
-    "Wildfire Video 4k.mp4": "smoke",
-    "Fog Over Forest 4k Video.mp4": "fog",
+    "smoke.mp4": "smoke",
+    "wildfire.mp4": "smoke",
+    "fog.mp4": "fog",
 }
 
 SAMPLE_RATE = 2  # frames per source second
